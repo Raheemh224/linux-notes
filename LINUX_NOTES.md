@@ -71,19 +71,22 @@ Important directories:
 
 - /tmp — Temporary files.
 
-# Common Commands for Files and Directories
-Command	Description
-- `pwd`	Print working directory.
-- `cd`	Change directory.
-- `ls`	List files and directories.
-- `mkdir`	Create a new directory.
-- `rmdir`	Remove an empty directory.
-- `touch`	Create an empty file or update timestamps.
-- `rm`	Remove a file. Use rm -r for directories.
-- `cat`	Display file contents.
-- `echo` "text" > file	Write (overwrite) text to a file.
-- `echo `"text" >> file	Append text to a file.
-- `grep`	Search for text within files.
+## Common Commands for Files and Directories
+
+| Command                  | Description                                  |
+|--------------------------|----------------------------------------------|
+| `pwd`                    | Print working directory.                     |
+| `cd`                     | Change directory.                            |
+| `ls`                     | List files and directories.                  |
+| `mkdir`                  | Create a new directory.                      |
+| `rmdir`                  | Remove an empty directory.                   |
+| `touch`                  | Create an empty file or update timestamps.   |
+| `rm`                     | Remove a file. Use `rm -r` for directories.  |
+| `cat`                    | Display file contents.                       |
+| `echo "text" > file`     | Write (overwrite) text to a file.            |
+| `echo "text" >> file`    | Append text to a file.                       |
+| `grep`                   | Search for text within files.                |
+
 
 `ls -a` shows hidden files (starting with .).
 
