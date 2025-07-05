@@ -1,187 +1,151 @@
-# Linux Essentials – DevOps Bootcamp Notes
+### Linux Notes – DevOps Bootcamp
+# Basic Commands
+`whoami` — Shows the current logged-in user.
 
-These are my beginner-friendly notes from the Linux module of my DevOps Bootcamp. They cover core Linux commands, shell basics, file management, user permissions, and more.
+`pwd` — Prints the current working directory.
 
----
+`ls` — Lists files and directories.
 
-## Basic Linux Commands
+`find` / -name "found.txt" — Searches the entire system for a file named "found.txt".
 
-| Command        | Description                                                  |
-|----------------|--------------------------------------------------------------|
-| `whoami`       | Shows the current logged-in user.                            |
-| `pwd`          | Prints the current working directory.                        |
-| `ls`           | Lists files and directories. Use `ls -a` to include hidden files. |
-| `cd`           | Changes directory. Use `cd ..` to go up one level.          |
-| `mkdir <name>` | Creates a new directory.                                     |
-| `rmdir <name>` | Removes an empty directory.                                  |
-| `touch <file>` | Creates a new empty file.                                    |
-| `rm <file>`    | Deletes a file. Use `rm -r <dir>` to delete directories and their contents. |
-| `cat <file>`   | Displays the content of a file.                              |
-| `echo "text" > file.txt` | Writes text to a file (overwrites content).             |
-| `echo "text" >> file.txt` | Appends text to a file without deleting existing content. |
-| `grep <word> <file>` | Searches for a word in a file.                              |
-| `find / -name "filename"` | Searches for a file by name starting from root (`/`).      |
+Temporary Files
+/tmp — Directory for temporary files.
 
----
+# What Are Commands?
+- Text instructions that tell the OS what to do.
 
-## Understanding the Shell
+- Entered directly in the terminal.
 
-### What is a Shell?
+- Commands are case sensitive.
 
-A **shell** is a program that acts as a bridge between the user and the operating system. It takes commands you type and translates them into actions the OS can perform.
+- Can have options and arguments to modify behaviour.
 
-- Common shell: **Bash** (Bourne Again Shell)  
-- Another popular shell: **ZSH**
+Manuals (man) provide detailed instructions.
 
-### Check Current Shell
+# Shells
+Use echo $SHELL to see your current shell.
 
-```bash
-echo $SHELL
-View Available Shells
-bash
-Copy code
-cat /etc/shells
-Installing and Setting Up ZSH
-ZSH is a powerful alternative to Bash with advanced features like autocomplete, spelling correction, and themes.
+`cat /etc/shells` lists all available shells on your system.
 
-Install ZSH
-bash
-Copy code
-sudo apt-get install zsh
-Set ZSH as Default Shell
-bash
-Copy code
-sudo chsh -s /bin/zsh
-If that doesn't work, try:
+apt-get is a package manager to install software.
 
-bash
-Copy code
-sudo chsh -s $(which zsh) $(whoami)
-$(which zsh) locates the ZSH binary.
+# Installing and Setting Up ZSH
+- Install ZSH:
 
-$(whoami) applies it to your current user.
+`sudo apt-get install zsh`
 
-Restart to Apply Changes
+- Set ZSH as your default shell:
+
+`sudo chsh -s /bin/zsh`
+
+- If that doesn't work, try:
+
+`sudo chsh -s $(which zsh) $(whoami)`
+
+Restart the terminal to start using ZSH.
+
 ZSH Configuration
-ZSHRC File
-.zshrc is the configuration file for ZSH located in your home directory (~).
+.zshrc is a hidden configuration file in your home directory.
 
-To reload changes:
+To apply changes made to .zshrc:
 
-bash
-Copy code
-source ~/.zshrc
-Plugins & Themes
-Plugins enhance the shell with features like syntax highlighting and autosuggestions.
+`source ~/.zshrc`
 
-Popular Framework: Oh My ZSH
+To configure the Powerlevel10k theme:
 
-Manages ZSH configurations.
-
-Comes with themes, plugins, and customisation options.
-
-Powerlevel10k Theme
-To configure it:
-
-bash
-Copy code
 p10k configure
-Themes are stored here:
 
-bash
-Copy code
-cd ~/.oh-my-zsh/themes
-ls
-Linux File System Overview
-The file system starts from the root directory / and branches into:
+Plugins
+Plugins extend the shell’s features, such as auto-completion.
 
-Directory	Description
-/	Root directory (top of the hierarchy)
-/boot	Boot loader files and Linux kernel
-/dev	Device files (e.g., disks, USBs)
-/etc	System-wide config files and startup scripts
-/tmp	Temporary files
-/home	User directories
+# Linux File System
+Root directory is /.
 
-File Management Commands
-Copy, Move & Delete
-bash
-Copy code
-cp file.txt /path/       # Copy a file
-cp -r dir1/ dir2/        # Copy a directory recursively
-mv old.txt new.txt       # Rename or move a file
-rm file.txt              # Delete a file
-rm -r dir/               # Delete a directory and its contents recursively
-Creating Nested Directories
-bash
-Copy code
-mkdir -p project/src/components
-Handling Spaces in File/Folder Names
-bash
-Copy code
-touch "my project.txt"
-# or
-touch my\ project.txt
-Working with Files
+Important directories:
+
+- /boot — Boot files and kernel.
+
+- /dev — Device files (e.g., disks).
+
+- /etc — System-wide configuration files and startup scripts.
+
+- /tmp — Temporary files.
+
+# Common Commands for Files and Directories
 Command	Description
-touch file.txt	Creates an empty file
-cat file.txt	Displays contents of the file
-echo "text" > file.txt	Writes text to a file (overwrites)
->>	Appends text to a file
-head file.txt	Shows first 10 lines of a file
-tail file.txt	Shows last 10 lines of a file
-head -n 10 file.txt | tail -n 5	Shows lines 6 to 10 (combining head & tail)
+`pwd`	Print working directory.
+`cd`	Change directory.
+`ls`	List files and directories.
+`mkdir`	Create a new directory.
+`rmdir`	Remove an empty directory.
+`touch`	Create an empty file or update timestamps.
+`rm`	Remove a file. Use rm -r for directories.
+`cat`	Display file contents.
+`echo` "text" > file	Write (overwrite) text to a file.
+`echo `"text" >> file	Append text to a file.
+`grep`	Search for text within files.
 
-VIM Basics (Text Editor)
-VIM has 3 modes: Command, Insert, and Visual.
+`ls -a` shows hidden files (starting with .).
 
-Action	Command
-Enter insert mode	i
-Save and exit	:wq
-Quit without saving	:q!
-Delete line	dd
-Copy (yank)	yy
-Paste	p
-Undo	u
-Redo	Ctrl + r
-Search	/word
-Next result	n
-Previous result	N
-Move cursor	h j k l
+`cd ..` moves to the parent directory.
 
-Users and Permissions
-Users
-bash
-Copy code
-sudo useradd newuser
-su newuser                    # Switch user
-sudo usermod -aG sudo newuser # Give sudo privileges
-Groups
-bash
-Copy code
-sudo groupadd newgroup
-sudo usermod -aG newgroup newuser
-sudo groupdel newgroup
-To add a user to multiple groups:
+- Handling Spaces in File and Directory Names
+Use quotes or backslashes to include spaces:
 
-bash
-Copy code
-sudo usermod -aG admin,admin2 newuser
-File Permissions & Ownership
-Permission Symbols
-r = read
+`touch "my project"`
+`touch my\ project`
 
-w = write
+# Vim Text Editor Basics
+Modes: Command, Insert, Visual.
 
-x = execute
+- Navigation: h left, j down, k up, l right.
 
-Format: rwx:rwx:rwx (User : Group : Others)
+- Delete line: dd
 
-Change Permissions
-bash
-Copy code
-chmod ug=rw, o=r file.txt
-Change Ownership
-bash
-Copy code
-sudo chown newuser file.txt           #
+- Copy (yank): yy
+
+- Paste: p
+
+- Undo: u
+
+- Redo: Ctrl + r
+
+- Search: /word then n for next occurrence.
+
+User and Group Management
+Create a user:
+
+`sudo useradd newuser`
+
+Switch user:
+
+`su newuser`
+
+Add user to sudo group:
+
+`sudo usermod -aG sudo newuser`
+
+Create a group:
+
+`sudo groupadd newgroup`
+
+Add user to group:
+
+`sudo usermod -aG newgroup newuser`
+
+# File Permissions and Ownership
+Permissions format: rwx:rwx:rwx (User : Group : Others).
+
+r = read, w = write, x = execute.
+
+Change permissions:
+
+- chmod ug=rw,o=r file.txt
+
+Change owner:
+
+- sudo chown newuser file.txt
+
+Change owner and group:
+
+- sudo chown newuser:newgroup file.txt
